@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 GL-Blog
+# GL-Blog
 
 ![GL-Blog Logo](https://img.shields.io/badge/GL--Blog-1.0-blueviolet?style=for-the-badge&logo=blog)
 [![Docker Image](https://img.shields.io/docker/v/lihupr/gl-blog?label=Docker%20Hub&style=for-the-badge&color=blue&logo=docker)](https://hub.docker.com/r/lihupr/gl-blog)
@@ -141,14 +141,8 @@
 ### 1️⃣ Docker 部署（推荐）
 
 #### 🏠 快速启动
-```bash
-docker run -d \
-  --name gl-blog \
-  --restart unless-stopped \
-  -p 3000:3000 \
-  -v /path/to/data:/app/data \
-  -e TZ=Asia/Shanghai \
-  lihupr/gl-blog:latest
+```
+docker run -d --name gl-blog --restart unless-stopped -p 3000:3000 -v /path/to/data:/app/data -e TZ=Asia/Shanghai lihupr/gl-blog:latest
 ```
 
 #### 🛠️ 使用 Docker Compose
