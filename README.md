@@ -10,7 +10,10 @@
 **新一代极简轻量博客系统**  
 基于 Go 语言开发的现代化个人博客平台，无数据库依赖，支持一键部署和数据迁移。
 
-<img width="2560" height="1351" alt="GL-Blog" src="https://github.com/user-attachments/assets/00fb127d-73b1-43b1-a891-0443c5b8fb68" />
+<img width="2532" height="1333" alt="image" src="https://github.com/user-attachments/assets/90a058d9-7098-4383-adc9-271a18f238fc" />  
+<img width="2516" height="1338" alt="image" src="https://github.com/user-attachments/assets/fac5d6b7-5850-4fc1-a556-9dfb225d6a0d" />
+
+
 
 *© 2025 GL-Blog • Designed for Simplicity & Performance*
 
