@@ -47,6 +47,8 @@
 - **触控优化**: 完美的移动端操作体验
 - **自适应布局**: 完美适配手机/平板/桌面
 
+<img width="406" height="906" alt="image" src="https://github.com/user-attachments/assets/4d41fa11-23c4-46ba-9693-40150f9f729d" />
+
 #### 🎨 现代化 UI 特性
 - **动态背景**: 支持自定义背景图片
 - **实时状态**: 服务器 CPU/内存/负载监控
@@ -63,6 +65,8 @@
 - **登录提醒**: 异地登录安全通知
 - **IP 定位**: 自动获取登录地理位置
 - **批量发送**: 支持群发和模板邮件
+
+<img width="2531" height="1332" alt="image" src="https://github.com/user-attachments/assets/0fdbd95a-ece7-47da-bd90-24a35f776619" />
 
 #### 📮 邮件服务特性
 - **主流邮箱**: 完美支持 Gmail/Outlook/QQ/163 等
@@ -125,6 +129,8 @@
 - **语法高亮**: 支持代码语法着色
 - **拖拽上传**: 图片直接拖拽插入
 - **快捷键**: 丰富的编辑快捷键
+
+<img width="2519" height="1335" alt="image" src="https://github.com/user-attachments/assets/fc17e1cf-8d2b-43e4-bbdf-1e24c8aabddc" />
 
 #### 🏷️ 内容组织系统
 - **分类管理**: 灵活的文章分类
