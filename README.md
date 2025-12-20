@@ -8,7 +8,10 @@
 [![Go Language](https://img.shields.io/badge/Go-1.21+-00ADD8?style=for-the-badge&logo=go)](https://github.com/Lihu-PR)
 
 **新一代极简轻量博客系统**  
-基于 Go 语言开发的现代化个人博客平台，无数据库依赖，支持一键部署和数据迁移。
+基于 Go 语言开发的现代化个人博客平台，无数据库依赖，支持一键部署和数据迁移。  
+
+### 🌐 在线体验
+**[演示站点](https://blog.lihu-pr.top/)** - 仅作为演示站点
 
 <img width="2532" height="1333" alt="image" src="https://github.com/user-attachments/assets/90a058d9-7098-4383-adc9-271a18f238fc" />  
 <img width="2516" height="1338" alt="image" src="https://github.com/user-attachments/assets/fac5d6b7-5850-4fc1-a556-9dfb225d6a0d" />
