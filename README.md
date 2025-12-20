@@ -142,7 +142,7 @@
 
 #### 🏠 快速启动
 ```
-docker run -d --name gl-blog --restart unless-stopped -p 3000:3000 -v /path/to/data:/app/data -e TZ=Asia/Shanghai lihupr/gl-blog:latest
+docker run -d --name gl-blog --restart unless-stopped -p 3000:3000 -v /root/gl-blog/data:/app/data -e TZ=Asia/Shanghai lihupr/gl-blog:latest
 ```
 
 #### 🛠️ 使用 Docker Compose
