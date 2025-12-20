@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>初始化设置 - GL-Blog</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      background: #0a0a0a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* 背景图片 */
+    .bg-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.85;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
+      z-index: 1;
+    }
+
+    /* Stepper 容器 */
+    .outer-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      min-height: 100vh;
+      flex: 1 1 0%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .step-circle-container {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      max-width: 32rem;
+      border-radius: 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .step-indicator-row {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      padding: 2rem 2rem 1rem;
+    }
+
+    .step-content-default {
+      position: relative;
+      overflow: hidden;
+      transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .step-default {
+      padding: 1.5rem 2rem;
+    }
+
+    .step-default h2 {
+      font-size: 1.8em;
+      margin-bottom: 0.5em;
+      color: #1a1a1a;
+    }
+
+    .step-default p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1.5em;
+    }
+
+    .step-default input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: all 0.3s;
+      margin-bottom: 1em;
+    }
+
+    .step-default input:focus {
+      outline: none;
+      border-color: #5227FF;
+    }
+
+    .step-default label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .welcome-icon {
+      font-size: 4em;
+      text-align: center;
+      margin-bottom: 0.5em;
+    }
+
+    .success-icon {
+      font-size: 5em;
+      text-align: center;
+      margin-bottom: 0.5em;
+      animation: scaleIn 0.5s ease-out;
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .footer-container {
+      padding: 0 2rem 2rem;
+    }
+
+    .footer-nav {
+      margin-top: 2rem;
+      display: flex;
+    }
+
+    .footer-nav.spread {
+      justify-content: space-between;
+    }
+
+    .footer-nav.end {
+      justify-content: flex-end;
+    }
+
+    .back-button {
+      transition: all 350ms;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      color: #666;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-size: 1em;
+    }
+
+    .back-button:hover {
+      color: #333;
+      background: rgba(0,0,0,0.05);
+    }
+
+    .next-button {
+      transition: all 350ms;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      background-color: #5227ff;
+      color: #fff;
+      font-weight: 500;
+      padding: 0.5rem 1.5rem;
+      cursor: pointer;
+      border: none;
+      font-size: 1em;
+    }
+
+    .next-button:hover {
+      background-color: #4119e6;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(82, 39, 255, 0.4);
+    }
+
+    .next-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .step-indicator {
+      position: relative;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .step-indicator-inner {
+      display: flex;
+      height: 2.5rem;
+      width: 2.5rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .step-indicator-inner.inactive {
+      background-color: #e0e0e0;
+      color: #999;
+    }
+
+    .step-indicator-inner.active {
+      background-color: #5227FF;
+      color: #fff;
+    }
+
+    .step-indicator-inner.complete {
+      background-color: #5227FF;
+      color: #fff;
+    }
+
+    .active-dot {
+      height: 0.75rem;
+      width: 0.75rem;
+      border-radius: 9999px;
+      background-color: #fff;
+    }
+
+    .step-number {
+      font-size: 0.875rem;
+    }
+
+    .step-connector {
+      position: relative;
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      height: 0.125rem;
+      flex: 1;
+      overflow: hidden;
+      border-radius: 0.25rem;
+      background-color: #e0e0e0;
+    }
+
+    .step-connector-inner {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background-color: #5227FF;
+      transition: width 0.4s ease;
+    }
+
+    .step-connector-inner.complete {
+      width: 100%;
+    }
+
+    .check-icon {
+      height: 1.2rem;
+      width: 1.2rem;
+      color: #fff;
+    }
+
+    .slide-container {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide-enter {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    .slide-center {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .slide-exit {
+      opacity: 0;
+      transform: translateX(50%);
+    }
+
+    .error-message {
+      color: #e74c3c;
+      font-size: 0.9em;
+      margin-top: -0.5em;
+      margin-bottom: 1em;
+    }
+
+    @media (max-width: 768px) {
+      .step-circle-container {
+        max-width: 95%;
+        padding: 40px 25px;
+        border-radius: 16px;
+      }
+
+      .step-default h2 {
+        font-size: 1.6rem;
+      }
+      
+      .step-indicator-row {
+        gap: 10px;
+      }
+      
+      .step-indicator {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+      }
+      
+      .step-line {
+        height: 2px;
+      }
+      
+      .form-group label {
+        font-size: 0.95rem;
+      }
+      
+      .form-control {
+        padding: 10px 14px;
+        font-size: 1rem;
+      }
+      
+      .btn-primary {
+        padding: 12px 28px;
+        font-size: 1rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .step-circle-container {
+        max-width: calc(100% - 24px);
+        padding: 30px 20px;
+        border-radius: 14px;
+      }
+
+      .step-default h2 {
+        font-size: 1.4rem;
+      }
+      
+      .step-indicator-row {
+        gap: 8px;
+      }
+      
+      .step-indicator {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;
+      }
+      
+      .step-line {
+        min-width: 20px;
+      }
+      
+      .form-group label {
+        font-size: 0.9rem;
+      }
+      
+      .form-control {
+        padding: 9px 12px;
+        font-size: 0.95rem;
+      }
+      
+      .btn-primary {
+        padding: 11px 24px;
+        font-size: 0.95rem;
+      }
+    }
+    
+    /* 移除所有按钮和可点击元素的焦点轮廓 */
+    button, a, input, select, textarea, [role="button"], [tabindex], .form-button, .step-button {
+      outline: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+    }
+    
+    button:focus, a:focus, input:focus, select:focus, textarea:focus, [role="button"]:focus, [tabindex]:focus, .form-button:focus, .step-button:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- 背景图片 -->
+  <img src="/BG/BG.png" alt="Background" class="bg-image">
+  <div class="bg-overlay"></div>
+
+  <!-- Stepper 容器 -->
+  <div class="outer-container">
+    <div class="step-circle-container">
+      <div class="step-indicator-row" id="stepIndicators"></div>
+      <div class="step-content-default" id="stepContent"></div>
+      <div class="footer-container" id="footer"></div>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 4;
+    let siteName = '';
+    let username = '';
+    let email = '';
+    let password = '';
+    let confirmPassword = '';
+
+    const steps = [
+      {
+        title: '欢迎使用 GL-Blog',
+        icon: '🎉',
+        content: '感谢您选择 GL-Blog！让我们花几分钟时间完成初始设置，开启您的博客之旅。',
+        fields: []
+      },
+      {
+        title: '设置站点名称',
+        icon: '🏠',
+        content: '为您的博客起一个响亮的名字吧！',
+        fields: [
+          { id: 'siteName', label: '站点名称', type: 'text', placeholder: '例如：我的技术博客', value: () => siteName, onChange: (v) => siteName = v }
+        ]
+      },
+      {
+        title: '创建管理员账号',
+        icon: '',
+        content: '设置管理员用户名、邮箱和密码，用于登录管理后台。',
+        fields: [
+          { id: 'username', label: '管理员用户名', type: 'text', placeholder: '请输入用户名', value: () => username, onChange: (v) => username = v },
+          { id: 'email', label: '管理员邮箱', type: 'email', placeholder: '请输入邮箱地址', value: () => email, onChange: (v) => email = v },
+          { id: 'password', label: '管理员密码', type: 'password', placeholder: '请输入密码（至少6位）', value: () => password, onChange: (v) => password = v },
+          { id: 'confirmPassword', label: '确认密码', type: 'password', placeholder: '请再次输入密码', value: () => confirmPassword, onChange: (v) => confirmPassword = v }
+        ]
+      },
+      {
+        title: '设置完成！',
+        icon: '✨',
+        content: '恭喜！您已成功完成所有设置。现在可以开始使用 GL-Blog 了！',
+        fields: []
+      }
+    ];
+
+    function renderStepIndicators() {
+      const container = document.getElementById('stepIndicators');
+      let html = '';
+      
+      for (let i = 1; i <= totalSteps; i++) {
+        const status = currentStep === i ? 'active' : currentStep > i ? 'complete' : 'inactive';
+        
+        html += `
+          <div class="step-indicator" onclick="goToStep(${i})">
+            <div class="step-indicator-inner ${status}">
+              ${status === 'complete' ? `
+                <svg class="check-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+              ` : status === 'active' ? `
+                <div class="active-dot"></div>
+              ` : `
+                <span class="step-number">${i}</span>
+              `}
+            </div>
+          </div>
+        `;
+        
+        if (i < totalSteps) {
+          html += `
+            <div class="step-connector">
+              <div class="step-connector-inner ${currentStep > i ? 'complete' : ''}"></div>
+            </div>
+          `;
+        }
+      }
+      
+      container.innerHTML = html;
+    }
+
+    function renderStepContent() {
+      const step = steps[currentStep - 1];
+      const container = document.getElementById('stepContent');
+      
+      let fieldsHtml = '';
+      step.fields.forEach(field => {
+        fieldsHtml += `
+          <div>
+            <label for="${field.id}">${field.label}</label>
+            <input 
+              type="${field.type}" 
+              id="${field.id}" 
+              placeholder="${field.placeholder}"
+              value="${field.value()}"
+              oninput="handleFieldChange('${field.id}', this.value)"
+            />
+            <div id="${field.id}-error" class="error-message" style="display: none;"></div>
+          </div>
+        `;
+      });
+
+      const contentHeight = container.scrollHeight;
+      
+      container.innerHTML = `
+        <div class="step-default slide-center">
+          ${step.icon ? `<div class="${currentStep === totalSteps ? 'success-icon' : 'welcome-icon'}">${step.icon}</div>` : ''}
+          <h2>${step.title}</h2>
+          <p>${step.content}</p>
+          ${fieldsHtml}
+        </div>
+      `;
+    }
+
+    function renderFooter() {
+      const container = document.getElementById('footer');
+      const isLastStep = currentStep === totalSteps;
+      
+      if (isLastStep) {
+        container.innerHTML = `
+          <div class="footer-nav end">
+            <button onclick="completeSetup()" class="next-button">进入博客</button>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="footer-nav ${currentStep === 1 ? 'end' : 'spread'}">
+            ${currentStep > 1 ? '<button onclick="previousStep()" class="back-button">上一步</button>' : ''}
+            <button onclick="nextStep()" class="next-button" id="nextButton">
+              ${currentStep === totalSteps - 1 ? '完成' : '下一步'}
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function handleFieldChange(fieldId, value) {
+      const field = steps[currentStep - 1].fields.find(f => f.id === fieldId);
+      if (field) {
+        field.onChange(value);
+      }
+      clearError(fieldId);
+    }
+
+    function showError(fieldId, message) {
+      const errorEl = document.getElementById(`${fieldId}-error`);
+      if (errorEl) {
+        errorEl.textContent = message;
+        errorEl.style.display = 'block';
+      }
+    }
+
+    function clearError(fieldId) {
+      const errorEl = document.getElementById(`${fieldId}-error`);
+      if (errorEl) {
+        errorEl.style.display = 'none';
+      }
+    }
+
+    function validateStep() {
+      if (currentStep === 2) {
+        if (!siteName.trim()) {
+          showError('siteName', '请输入站点名称');
+          return false;
+        }
+      }
+      
+      if (currentStep === 3) {
+        if (!username.trim()) {
+          showError('username', '请输入用户名');
+          return false;
+        }
+        if (username.length < 3) {
+          showError('username', '用户名至少3个字符');
+          return false;
+        }
+        if (!email.trim()) {
+          showError('email', '请输入邮箱地址');
+          return false;
+        }
+        // 简单的邮箱格式验证
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          showError('email', '请输入有效的邮箱地址');
+          return false;
+        }
+        if (!password) {
+          showError('password', '请输入密码');
+          return false;
+        }
+        if (password.length < 6) {
+          showError('password', '密码至少6个字符');
+          return false;
+        }
+        if (password !== confirmPassword) {
+          showError('confirmPassword', '两次输入的密码不一致');
+          return false;
+        }
+      }
+      
+      return true;
+    }
+
+    function nextStep() {
+      if (!validateStep()) {
+        return;
+      }
+      
+      if (currentStep < totalSteps) {
+        currentStep++;
+        render();
+      }
+    }
+
+    function previousStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        render();
+      }
+    }
+
+    function goToStep(step) {
+      if (step <= currentStep && step >= 1) {
+        currentStep = step;
+        render();
+      }
+    }
+
+    async function completeSetup() {
+      try {
+        const response = await fetch('/api/setup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            siteName,
+            username,
+            email,
+            password
+          })
+        });
+
+        if (response.ok) {
+          // 设置完成，跳转到首页
+          window.location.href = '/';
+        } else {
+          alert('设置失败，请重试');
+        }
+      } catch (error) {
+        console.error('设置失败:', error);
+        alert('设置失败，请重试');
+      }
+    }
+
+    function render() {
+      renderStepIndicators();
+      renderStepContent();
+      renderFooter();
+    }
+
+    // 初始化
+    render();
+  </script>
+</body>
+</html>
+
