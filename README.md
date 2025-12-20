@@ -10,7 +10,8 @@
 **新一代极简轻量博客系统**  
 专为个人博客和技术文档设计，无数据库依赖，支持一键部署和数据迁移。
 
-<img width="2560" height="1351" alt="GL-Blog" src="https://github.com/user-attachments/assets/00fb127d-73b1-43b1-a891-0443c5b8fb68" />
+<img width="2532" height="1333" alt="image" src="https://github.com/user-attachments/assets/90a058d9-7098-4383-adc9-271a18f238fc" />
+
 
 *© 2025 GL-Blog • Designed for Simplicity*
 
