@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 GL-Blog
+# GL-Blog
 
 ![GL-Blog Logo](https://img.shields.io/badge/GL--Blog-1.0-blueviolet?style=for-the-badge&logo=blog)
 [![Docker Image](https://img.shields.io/docker/v/lihupr/gl-blog?label=Docker%20Hub&style=for-the-badge&color=blue&logo=docker)](https://hub.docker.com/r/lihupr/gl-blog)
