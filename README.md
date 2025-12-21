@@ -10,7 +10,8 @@
 **新一代极简轻量博客系统**  
 基于 Go 语言开发的现代化个人博客平台，无数据库依赖，支持一键部署和数据迁移。  
 
-**[演示站点](https://blog.lihu-pr.top/)** - 仅作为演示站点，内容即项目默认内容
+**[演示站点](https://blog.lihu-pr.top/)** - 仅作为演示站点，内容即项目默认内容  
+
 **[方澄云](https://cloud.fcynet.com/aff/PFBBSXHP)** - 优质上游服务器供应商
 
 <img width="2532" height="1333" alt="image" src="https://github.com/user-attachments/assets/90a058d9-7098-4383-adc9-271a18f238fc" />  
