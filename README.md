@@ -153,7 +153,10 @@
 
 #### 🏠 快速启动
 ```
+# AMD64架构服务器
 docker run -d --name gl-blog --restart unless-stopped -p 3000:3000 -v /root/gl-blog/data:/app/data -e TZ=Asia/Shanghai lihupr/gl-blog:latest
+# ARM64架构服务器
+docker run -d --name gl-blog --restart unless-stopped -p 3000:3000 -v /root/gl-blog/data:/app/data -e TZ=Asia/Shanghai lihupr/gl-blog:arm64
 ```
 
 #### 🛠️ 使用 Docker Compose
