@@ -180,6 +180,26 @@ services:
       timeout: 10s
       retries: 3
 ```
+##### ARM64设备：
+```yaml
+version: '3.8'
+services:
+  gl-blog:
+    image: lihupr/gl-blog:arm64
+    container_name: gl-blog
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - TZ=Asia/Shanghai
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+```
 
 > **访问地址**：打开浏览器访问 `http://服务器IP:3000`
 
