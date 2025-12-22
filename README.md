@@ -159,7 +159,8 @@ docker run -d --name gl-blog --restart unless-stopped -p 3000:3000 -v /root/gl-b
 docker run -d --name gl-blog --restart unless-stopped -p 3000:3000 -v /root/gl-blog/data:/app/data -e TZ=Asia/Shanghai lihupr/gl-blog:arm64
 ```
 
-#### 🛠️ 使用 Docker Compose
+#### 🛠️ 使用 Docker Compose  
+##### AMD64设备：
 ```yaml
 version: '3.8'
 services:
