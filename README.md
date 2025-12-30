@@ -13,7 +13,7 @@
 **[演示站点](https://blog.lihu-pr.top/)** - 仅作为演示站点，内容即项目默认内容  
 
   
-**[方澄云](https://cloud.fcynet.com/aff/PFBBSXHP)** - 优质上游服务器供应商
+**[方澄云](https://cloud.fcynet.com/aff/PFBBSXHP)** - 优质上游服务器供应商(推荐香港三区和五区)
 
 <img width="2532" height="1333" alt="image" src="https://github.com/user-attachments/assets/90a058d9-7098-4383-adc9-271a18f238fc" />  
 <img width="2516" height="1338" alt="image" src="https://github.com/user-attachments/assets/fac5d6b7-5850-4fc1-a556-9dfb225d6a0d" />
